@@ -58,10 +58,8 @@ class _MyAppState extends State<MyApp> {
                 ),
                 RaisedButton(
                   onPressed: () async {
-                    File file = await ImagePicker.pickImage(
-                        source: ImageSource.gallery);
-                    SocialShare.shareInstagramStory(file.path, "#ffffff",
-                            "#000000", "https://deep-link-url")
+                    File file = await ImagePicker.pickImage(source: ImageSource.gallery);
+                    SocialShare.shareInstagramStory(file.path, "#ffffff", "#000000", "https://deep-link-url")
                         .then((data) {
                       print(data);
                     });
@@ -71,8 +69,8 @@ class _MyAppState extends State<MyApp> {
                 RaisedButton(
                   onPressed: () async {
                     await screenshotController.capture().then((image) async {
-                      SocialShare.shareInstagramStorywithBackground(image.path,
-                              "#ffffff", "#000000", "https://deep-link-url",
+                      SocialShare.shareInstagramStorywithBackground(
+                              image.path, "#ffffff", "#000000", "https://deep-link-url",
                               backgroundImagePath: image.path)
                           .then((data) {
                         print(data);
@@ -86,14 +84,12 @@ class _MyAppState extends State<MyApp> {
                     await screenshotController.capture().then((image) async {
                       //facebook appId is mandatory for andorid or else share won't work
                       Platform.isAndroid
-                          ? SocialShare.shareFacebookStory(image.path,
-                                  "#ffffff", "#000000", "https://google.com",
+                          ? SocialShare.shareFacebookStory(image.path, "#ffffff", "#000000", "https://google.com",
                                   appId: "xxxxxxxxxxxxx")
                               .then((data) {
                               print(data);
                             })
-                          : SocialShare.shareFacebookStory(image.path,
-                                  "#ffffff", "#000000", "https://google.com")
+                          : SocialShare.shareFacebookStory(image.path, "#ffffff", "#000000", "https://google.com")
                               .then((data) {
                               print(data);
                             });
@@ -113,8 +109,7 @@ class _MyAppState extends State<MyApp> {
                 ),
                 RaisedButton(
                   onPressed: () async {
-                    SocialShare.shareTwitter(
-                            "This is Social Share twitter example",
+                    SocialShare.shareTwitter("This is Social Share twitter example",
                             hashtags: ["hello", "world", "foo", "bar"],
                             url: "https://google.com/#/hello",
                             trailingText: "\nhello")
@@ -127,8 +122,7 @@ class _MyAppState extends State<MyApp> {
                 RaisedButton(
                   onPressed: () async {
                     SocialShare.shareSms("This is Social Share Sms example",
-                            url: "\nhttps://google.com/",
-                            trailingText: "\nhello")
+                            url: "\nhttps://google.com/", trailingText: "\nhello")
                         .then((data) {
                       print(data);
                     });
@@ -138,7 +132,7 @@ class _MyAppState extends State<MyApp> {
                 RaisedButton(
                   onPressed: () async {
                     await screenshotController.capture().then((image) async {
-                      SocialShare.shareOptions("Hello world").then((data) {
+                      SocialShare.shareOptions("Hello world", imagePath: image.path).then((data) {
                         print(data);
                       });
                     });
@@ -147,9 +141,7 @@ class _MyAppState extends State<MyApp> {
                 ),
                 RaisedButton(
                   onPressed: () async {
-                    SocialShare.shareWhatsapp(
-                            "Hello World \n https://google.com")
-                        .then((data) {
+                    SocialShare.shareWhatsapp("Hello World \n https://google.com").then((data) {
                       print(data);
                     });
                   },
@@ -157,9 +149,7 @@ class _MyAppState extends State<MyApp> {
                 ),
                 RaisedButton(
                   onPressed: () async {
-                    SocialShare.shareTelegram(
-                            "Hello World \n https://google.com")
-                        .then((data) {
+                    SocialShare.shareTelegram("Hello World \n https://google.com").then((data) {
                       print(data);
                     });
                   },

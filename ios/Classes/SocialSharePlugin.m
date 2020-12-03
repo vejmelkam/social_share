@@ -286,7 +286,8 @@
           else if([@"shareOptions" isEqualToString:call.method]){
             NSString *content = call.arguments[@"content"];
               NSString *image = call.arguments[@"image"];
-              //checking if it contains image file
+              
+              // if image file is not supplied, share content
               if ([image isEqual:[NSNull null]] || [ image  length] == 0 ){
                   //when image is not included
                   NSArray *objectsToShare = @[content];
@@ -295,14 +296,18 @@
                            [controller presentViewController:activityVC animated:YES completion:nil];
                             result([NSNumber numberWithBool:YES]);
               }else{
-                  //when image file is included
+                  // MV - when image file is included, don't share content, just share the image
+                  // MV - WhatsApp will not accept both, may be true for others
                   NSFileManager *fileManager = [NSFileManager defaultManager];
                                          BOOL isFileExist = [fileManager fileExistsAtPath: image];
                                          UIImage *imgShare;
                                          if (isFileExist) {
                                              imgShare = [[UIImage alloc] initWithContentsOfFile:image];
+                                         } else {
+                                             NSLog(@"error: shared image not found %@", image);
                                          }
-                                NSArray *objectsToShare = @[content, imgShare];
+                                // the actual change is below
+                                NSArray *objectsToShare = @[/* content */, imgShare];
                                 UIActivityViewController *activityVC = [[UIActivityViewController alloc] initWithActivityItems:objectsToShare applicationActivities:nil];
                                UIViewController *controller =[UIApplication sharedApplication].keyWindow.rootViewController;
                                 [controller presentViewController:activityVC animated:YES completion:nil];
