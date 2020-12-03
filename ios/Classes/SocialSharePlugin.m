@@ -307,7 +307,7 @@
                                              NSLog(@"error: shared image not found %@", image);
                                          }
                                 // the actual change is below
-                                NSArray *objectsToShare = @[/* content */, imgShare];
+                                NSArray *objectsToShare = @[/* content ,*/ imgShare];
                                 UIActivityViewController *activityVC = [[UIActivityViewController alloc] initWithActivityItems:objectsToShare applicationActivities:nil];
                                UIViewController *controller =[UIApplication sharedApplication].keyWindow.rootViewController;
                                 [controller presentViewController:activityVC animated:YES completion:nil];
